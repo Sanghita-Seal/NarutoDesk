@@ -81,7 +81,6 @@ export default function AkatsukiDetailScreen() {
         </Text>
       </View>
 
-      {/* Jutsu */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Jutsu

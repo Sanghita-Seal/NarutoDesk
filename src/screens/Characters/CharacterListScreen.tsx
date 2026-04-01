@@ -14,6 +14,7 @@ export default function CharacterListScreen() {
       "Unknown Clan";
 
     return (
+      
       <TouchableOpacity
         style={styles.card}
         onPress={() =>

@@ -1,8 +1,8 @@
-import { View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
+import { View, FlatList, ActivityIndicator, StyleSheet, Text, TextInput } from "react-native";
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import { getGenericData } from "../../services/api";
 import { Ionicons } from "@expo/vector-icons";
-import { TextInput } from "react-native";
+import { theme } from "../../constants/theme";
 
 type Props = {
   endpoint: string;
@@ -23,12 +23,10 @@ export default function BaseListScreen({
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
-  // 🔥 Load data
   useEffect(() => {
     loadData();
   }, []);
 
-  // 🔥 Header setup (drawer + title)
   useLayoutEffect(() => {
     navigation.setOptions({
       title,
@@ -57,30 +55,28 @@ export default function BaseListScreen({
     }
   };
 
-  // 🔥 Fake infinite scroll
- const loadMore = () => {
-  if (isSearching) return; // 🚫 STOP during search
+  const loadMore = () => {
+    if (isSearching) return; // 🚫 STOP during search
 
-  setVisibleData((prev) => [...prev, ...data]);
-};
+    setVisibleData((prev) => [...prev, ...data]);
+  };
   const handleSearch = (text: string) => {
-  setSearch(text);
+    setSearch(text);
 
-  if (!text.trim()) {
-    setIsSearching(false);
-    setVisibleData(data);
-    return;
-  }
+    if (!text.trim()) {
+      setIsSearching(false);
+      setVisibleData(data);
+      return;
+    }
 
-  setIsSearching(true);
+    setIsSearching(true);
 
-  const filtered = data.filter((item: any) =>
-    item.name?.toLowerCase().includes(text.toLowerCase())
-  );
+    const filtered = data.filter((item: any) =>
+      item.name?.toLowerCase().includes(text.toLowerCase()),
+    );
 
-  setVisibleData(filtered);
-};
-  // 🔥 Loader
+    setVisibleData(filtered);
+  };
   if (loading) {
     return (
       <View style={styles.loader}>
@@ -92,21 +88,23 @@ export default function BaseListScreen({
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-  <Ionicons
-    name="search"
-    size={18}
-    color="#aaa"
-    style={{ marginRight: 8 }}
-  />
+        <Ionicons
+          name="search"
+          size={18}
+          color="#aaa"
+          style={{ marginRight: 8 }}
+        />
 
-  <TextInput
-    placeholder="Search characters..."
-    placeholderTextColor="#888"
-    value={search}
-    onChangeText={handleSearch}
-    style={styles.searchInput}
-  />
-</View>
+        <TextInput
+          placeholder="Search characters..."
+          placeholderTextColor="#888"
+          value={search}
+          onChangeText={handleSearch}
+          style={styles.searchInput}
+        />
+      </View>
+
+      <Text style={styles.heading}>{title}</Text>
       <FlatList
         data={visibleData}
         numColumns={2}
@@ -121,12 +119,17 @@ export default function BaseListScreen({
   );
 }
 
-// 🔥 Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
     backgroundColor: "#18181b",
+  },
+  heading: {
+    color: theme.primary,
+    paddingLeft:10,
+    fontSize: 25,
+   
   },
   loader: {
     flex: 1,
@@ -135,24 +138,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#18181b",
   },
   searchContainer: {
-  flexDirection: "row",
-  alignItems: "center",
-  backgroundColor: "#27272a",
-  borderRadius: 14,
-  paddingHorizontal: 12,
-  marginBottom: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#27272a",
+    borderRadius: 14,
+    paddingHorizontal: 12,
+    marginBottom: 12,
 
-  // subtle elevation
-  shadowColor: "#000",
-  shadowOpacity: 0.3,
-  shadowRadius: 4,
-  elevation: 4,
-},
+    // subtle elevation
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
+  },
 
-searchInput: {
-  flex: 1,
-  color: "#fff",
-  paddingVertical: 10,
-  fontSize: 14,
-},
+  searchInput: {
+    flex: 1,
+    color: "#fff",
+    paddingVertical: 10,
+    fontSize: 14,
+  },
 });

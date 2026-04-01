@@ -3,38 +3,29 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { TouchableOpacity, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-// 🔥 Landing
 import LandingScreen from "../screens/Landing/LandingScreen";
 
-// Character
 import CharacterListScreen from "../screens/Characters/CharacterListScreen";
 import CharacterDetailScreen from "../screens/Characters/CharacterDetailsScreen";
 
-// Clans
 import ClanListScreen from "../screens/Clans/ClanListScreen";
 import ClanDetailScreen from "../screens/Clans/ClanDetailScreen";
 
-// Villages
 import VillageListScreen from "../screens/Villages/VillageListScreen";
 import VillageDetailScreen from "../screens/Villages/VillageDetailScreen";
 
-// Teams
 import TeamListScreen from "../screens/Teams/TeamListScreen";
 import TeamDetailScreen from "../screens/Teams/TeamDetailScreen";
 
-// Kekkei Genkai
 import KekkeiGenkaiListScreen from "../screens/KekkeiGenkai/KekkeiGenkaiListScreen";
 import KekkeiGenkaiDetailScreen from "../screens/KekkeiGenkai/KekkeiGenkaiDetailScreen";
 
-// Tailed Beasts
 import TailedBeastListScreen from "../screens/TailedBeasts/TailedBeastListScreen";
 import TailedBeastDetailScreen from "../screens/TailedBeasts/TailedBeastDetailScreen";
 
-// Akatsuki
 import AkatsukiListScreen from "../screens/Akatsuki/AkatsukiListScreen";
 import AkatsukiDetailScreen from "../screens/Akatsuki/AkatsukiDetailScreen";
 
-// Kara
 import KaraListScreen from "../screens/Kara/KaraListScreen";
 import KaraDetailScreen from "../screens/Kara/KaraDetailScreen";
 
@@ -43,7 +34,6 @@ const Stack = createNativeStackNavigator();
 const RootStack = createNativeStackNavigator();
 
 
-// 🔥 Common Header
 const commonHeader = {
   headerStyle: { backgroundColor: "#1b1a18" },
   headerTintColor: "#facc15",
@@ -56,7 +46,6 @@ const commonHeader = {
   ),
 };
 
-// 🔥 Menu Button
 const menuButton = (navigation: any) => (
   <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
     <Ionicons name="menu" size={26} color="#facc15"  style={{ marginLeft: 10 }} />
@@ -64,9 +53,6 @@ const menuButton = (navigation: any) => (
 );
 
 
-// ================= STACKS =================
-
-// 🔥 Character Stack
 const CharacterStack = ({ navigation }: any) => (
   <Stack.Navigator screenOptions={commonHeader}>
     <Stack.Screen
@@ -82,7 +68,7 @@ const CharacterStack = ({ navigation }: any) => (
 );
 
 
-// 🔥 Generic Stack Creator (cleaner)
+
 const createStack = (
   listName: string,
   ListComponent: any,
@@ -104,7 +90,7 @@ const createStack = (
   );
 };
 
-// 🔥 All stacks
+
 const ClanStack = createStack("Clans", ClanListScreen, "ClanDetail", ClanDetailScreen);
 const VillageStack = createStack("Villages", VillageListScreen, "VillageDetail", VillageDetailScreen);
 const TeamStack = createStack("Teams", TeamListScreen, "TeamDetail", TeamDetailScreen);
@@ -124,7 +110,6 @@ const AkatsukiStack = createStack("Akatsuki", AkatsukiListScreen, "AkatsukiDetai
 const KaraStack = createStack("Kara", KaraListScreen, "KaraDetail", KaraDetailScreen);
 
 
-// ================= DRAWER =================
 
 function DrawerNavigator() {
   return (
@@ -150,16 +135,13 @@ function DrawerNavigator() {
 }
 
 
-// ================= ROOT NAV =================
-
 export default function AppNavigator() {
   return (
     <RootStack.Navigator screenOptions={{ headerShown: false }}>
       
-      {/* 🔥 Landing First */}
+    
       <RootStack.Screen name="Landing" component={LandingScreen} />
 
-      {/* 🔥 Main App */}
       <RootStack.Screen name="Main" component={DrawerNavigator} />
 
     </RootStack.Navigator>
