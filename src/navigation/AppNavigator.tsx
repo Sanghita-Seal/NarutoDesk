@@ -22,9 +22,9 @@ const CharacterStack = ({ navigation }: any) => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: "#18181b" },
-        headerTintColor: "#fff",
-        contentStyle: { backgroundColor: "#18181b" },
+        headerStyle: { backgroundColor: "#1b1a18" },
+        headerTintColor: "#fb7430",
+        contentStyle: { backgroundColor: "#a2a2ca" },
       }}
     >
       <Stack.Screen
@@ -37,7 +37,7 @@ const CharacterStack = ({ navigation }: any) => {
               <Ionicons
                 name="menu"
                 size={26}
-                color="#fff"
+                color="#eecebe"
                 style={{ marginLeft: 10 }}
               />
             </TouchableOpacity>

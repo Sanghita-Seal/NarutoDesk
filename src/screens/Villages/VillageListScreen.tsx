@@ -1,4 +1,4 @@
-import BaseListScreen from "../shared/ListScreen";
+import BaseListScreen from "../shared/BaseListScreen";
 import {
   Text,
   TouchableOpacity,
