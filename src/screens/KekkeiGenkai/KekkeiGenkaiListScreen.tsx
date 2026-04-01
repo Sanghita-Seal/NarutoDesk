@@ -7,33 +7,33 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-// ✅ Use same asset (or create village.png if you want)
-import villageImage from "../../../assets/villages.jpeg";
+// ✅ same local image
+import kgImage from "../../../assets/villages.jpeg";
 
-export default function VillageListScreen() {
+export default function KekkeiGenkaiListScreen() {
   const navigation = useNavigation<any>();
 
   const renderCard = (item: any) => (
     <TouchableOpacity
       style={styles.card}
       onPress={() =>
-        navigation.navigate("VillageDetail", { item })
+        navigation.navigate("KekkeiGenkaiDetail", { item })
       }
     >
-      <Image source={villageImage} style={styles.image} />
+      <Image source={kgImage} style={styles.image} />
 
       <Text style={styles.name}>{item.name}</Text>
 
       <Text style={styles.sub}>
-        Members: {item.characters?.length || 0}
+        Users: {item.characters?.length || 0}
       </Text>
     </TouchableOpacity>
   );
 
   return (
     <BaseListScreen
-      endpoint="villages"
-      title="Villages"
+      endpoint="kekkei-genkai"
+      title="Kekkei Genkai"
       navigation={navigation}
       renderCard={renderCard}
     />

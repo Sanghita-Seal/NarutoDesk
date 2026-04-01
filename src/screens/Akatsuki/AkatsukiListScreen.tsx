@@ -7,33 +7,39 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-// ✅ Use same asset (or create village.png if you want)
-import villageImage from "../../../assets/villages.jpeg";
-
-export default function VillageListScreen() {
+export default function AkatsukiListScreen() {
   const navigation = useNavigation<any>();
 
   const renderCard = (item: any) => (
     <TouchableOpacity
       style={styles.card}
       onPress={() =>
-        navigation.navigate("VillageDetail", { item })
+        navigation.navigate("AkatsukiDetail", { item })
       }
     >
-      <Image source={villageImage} style={styles.image} />
+      {/* ✅ API image */}
+      <Image
+        source={{
+          uri:
+            item.images?.[0] ||
+            "https://i.imgur.com/6VBx3io.png",
+        }}
+        style={styles.image}
+      />
 
       <Text style={styles.name}>{item.name}</Text>
 
       <Text style={styles.sub}>
-        Members: {item.characters?.length || 0}
+        {item.personal?.classification?.[0] ||
+          "Akatsuki Member"}
       </Text>
     </TouchableOpacity>
   );
 
   return (
     <BaseListScreen
-      endpoint="villages"
-      title="Villages"
+      endpoint="akatsuki"
+      title="Akatsuki"
       navigation={navigation}
       renderCard={renderCard}
     />

@@ -1,50 +1,35 @@
-import React from "react";
+import BaseListScreen from "../shared/BaseListScreen";
 import {
   Text,
+  Image,
   TouchableOpacity,
   StyleSheet,
-  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import BaseListScreen from "../shared/BaseListScreen";
 
-// 🔥 fallback for clans
-const CLAN_IMAGE =
-  "https://i.imgur.com/8Km9tLL.png";
+// ✅ Import local image
+import clanImage from "../../../assets/clan.png";
 
 export default function ClanListScreen() {
   const navigation = useNavigation<any>();
 
-  const renderCard = (item: any): React.ReactElement => {
-    const imageUri =
-      item.images?.[0] || CLAN_IMAGE;
+  const renderCard = (item: any) => (
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() =>
+        navigation.navigate("ClanDetail", { item })
+      }
+    >
+      {/* ✅ Local Image */}
+      <Image source={clanImage} style={styles.image} />
 
-    return (
-      <TouchableOpacity
-        style={styles.card}
-        onPress={() =>
-          navigation.navigate("Detail", {
-            item,
-            endpoint: "clans",
-          })
-        }
-      >
-        {/* SAME UI AS CHARACTER */}
-        <Image
-          source={{ uri: imageUri }}
-          style={styles.image}
-        />
+      <Text style={styles.name}>{item.name}</Text>
 
-        <Text style={styles.name} numberOfLines={1}>
-          {item.name}
-        </Text>
-
-        <Text style={styles.sub}>
-          Members: {item.characters?.length || 0}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
+      <Text style={styles.sub}>
+        Members: {item.characters?.length || 0}
+      </Text>
+    </TouchableOpacity>
+  );
 
   return (
     <BaseListScreen
@@ -61,7 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 8,
     backgroundColor: "#27272a",
-    borderRadius: 16,
+    borderRadius: 14,
     padding: 10,
   },
   image: {
@@ -71,13 +56,11 @@ const styles = StyleSheet.create({
   },
   name: {
     color: "#fff",
-    fontSize: 15,
     fontWeight: "bold",
-    marginTop: 8,
+    marginTop: 6,
   },
   sub: {
-    color: "#a1a1aa",
+    color: "#aaa",
     fontSize: 12,
-    marginTop: 2,
   },
 });
