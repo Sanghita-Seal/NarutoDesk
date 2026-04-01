@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
+import {SafeAreaProvider} from "react-native-safe-area-context"
+import AppNavigator from "../NarutoDex/src/navigation/AppNavigator";
 
-export default function App() {
+export default function App(){
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+     <SafeAreaProvider>
+      <NavigationContainer>
+        <View style={styles.container}>
+          <AppNavigator />
+          <StatusBar style="light" />
+        </View>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#18181b",
   },
 });
