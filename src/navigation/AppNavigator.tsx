@@ -2,6 +2,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import the
 
 // Character
 import CharacterListScreen from "../screens/Characters/CharacterListScreen";
@@ -38,7 +39,6 @@ import KaraDetailScreen from "../screens/Kara/KaraDetailScreen";
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
-
 // 🔥 Common Header Left (menu button)
 const menuButton = (navigation: any) => (
   <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
@@ -51,14 +51,18 @@ const menuButton = (navigation: any) => (
   </TouchableOpacity>
 );
 
-
 // 🔥 Character Stack
 const CharacterStack = ({ navigation }: any) => (
-  <Stack.Navigator screenOptions={{
-    headerStyle: { backgroundColor: "#1b1a18" },
-    headerTintColor: "#fb7430",
-    contentStyle: { backgroundColor: "#0b0b0b" },
-  }}>
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "#1b1a18" },
+      headerTintColor: "#fb7430",
+      contentStyle: { backgroundColor: "#0b0b0b" },
+      headerTitle: "Naruto Explorer",
+      headerTitleAlign: "center",
+      
+    }}
+  >
     <Stack.Screen
       name="Characters"
       component={CharacterListScreen}
@@ -75,14 +79,15 @@ const CharacterStack = ({ navigation }: any) => (
   </Stack.Navigator>
 );
 
-
 // 🔥 Clan Stack
 const ClanStack = ({ navigation }: any) => (
-  <Stack.Navigator screenOptions={{
-    headerStyle: { backgroundColor: "#1b1a18" },
-    headerTintColor: "#fb7430",
-    contentStyle: { backgroundColor: "#0b0b0b" },
-  }}>
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "#1b1a18" },
+      headerTintColor: "#fb7430",
+      contentStyle: { backgroundColor: "#0b0b0b" },
+    }}
+  >
     <Stack.Screen
       name="Clans"
       component={ClanListScreen}
@@ -99,14 +104,15 @@ const ClanStack = ({ navigation }: any) => (
   </Stack.Navigator>
 );
 
-
 // 🔥 Village Stack
 const VillageStack = ({ navigation }: any) => (
-  <Stack.Navigator screenOptions={{
-    headerStyle: { backgroundColor: "#1b1a18" },
-    headerTintColor: "#fb7430",
-    contentStyle: { backgroundColor: "#0b0b0b" },
-  }}>
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "#1b1a18" },
+      headerTintColor: "#fb7430",
+      contentStyle: { backgroundColor: "#0b0b0b" },
+    }}
+  >
     <Stack.Screen
       name="Villages"
       component={VillageListScreen}
@@ -123,14 +129,15 @@ const VillageStack = ({ navigation }: any) => (
   </Stack.Navigator>
 );
 
-
 // 🔥 Team Stack
 const TeamStack = ({ navigation }: any) => (
-  <Stack.Navigator screenOptions={{
-    headerStyle: { backgroundColor: "#1b1a18" },
-    headerTintColor: "#fb7430",
-    contentStyle: { backgroundColor: "#0b0b0b" },
-  }}>
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "#1b1a18" },
+      headerTintColor: "#fb7430",
+      contentStyle: { backgroundColor: "#0b0b0b" },
+    }}
+  >
     <Stack.Screen
       name="Teams"
       component={TeamListScreen}
@@ -147,14 +154,15 @@ const TeamStack = ({ navigation }: any) => (
   </Stack.Navigator>
 );
 
-
 // 🔥 Kekkei Genkai Stack
 const KekkeiGenkaiStack = ({ navigation }: any) => (
-  <Stack.Navigator screenOptions={{
-    headerStyle: { backgroundColor: "#1b1a18" },
-    headerTintColor: "#fb7430",
-    contentStyle: { backgroundColor: "#0b0b0b" },
-  }}>
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "#1b1a18" },
+      headerTintColor: "#fb7430",
+      contentStyle: { backgroundColor: "#0b0b0b" },
+    }}
+  >
     <Stack.Screen
       name="KekkeiGenkai"
       component={KekkeiGenkaiListScreen}
@@ -171,14 +179,15 @@ const KekkeiGenkaiStack = ({ navigation }: any) => (
   </Stack.Navigator>
 );
 
-
 // 🔥 Tailed Beast Stack
 const TailedBeastStack = ({ navigation }: any) => (
-  <Stack.Navigator screenOptions={{
-    headerStyle: { backgroundColor: "#1b1a18" },
-    headerTintColor: "#fb7430",
-    contentStyle: { backgroundColor: "#0b0b0b" },
-  }}>
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "#1b1a18" },
+      headerTintColor: "#fb7430",
+      contentStyle: { backgroundColor: "#0b0b0b" },
+    }}
+  >
     <Stack.Screen
       name="TailedBeasts"
       component={TailedBeastListScreen}
@@ -195,14 +204,15 @@ const TailedBeastStack = ({ navigation }: any) => (
   </Stack.Navigator>
 );
 
-
 // 🔥 Akatsuki Stack
 const AkatsukiStack = ({ navigation }: any) => (
-  <Stack.Navigator screenOptions={{
-    headerStyle: { backgroundColor: "#1b1a18" },
-    headerTintColor: "#fb7430",
-    contentStyle: { backgroundColor: "#0b0b0b" },
-  }}>
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "#1b1a18" },
+      headerTintColor: "#fb7430",
+      contentStyle: { backgroundColor: "#0b0b0b" },
+    }}
+  >
     <Stack.Screen
       name="Akatsuki"
       component={AkatsukiListScreen}
@@ -219,14 +229,15 @@ const AkatsukiStack = ({ navigation }: any) => (
   </Stack.Navigator>
 );
 
-
 // 🔥 Kara Stack
 const KaraStack = ({ navigation }: any) => (
-  <Stack.Navigator screenOptions={{
-    headerStyle: { backgroundColor: "#1b1a18" },
-    headerTintColor: "#fb7430",
-    contentStyle: { backgroundColor: "#0b0b0b" },
-  }}>
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "#1b1a18" },
+      headerTintColor: "#fb7430",
+      contentStyle: { backgroundColor: "#0b0b0b" },
+    }}
+  >
     <Stack.Screen
       name="Kara"
       component={KaraListScreen}
@@ -243,17 +254,18 @@ const KaraStack = ({ navigation }: any) => (
   </Stack.Navigator>
 );
 
-
 // 🔥 Drawer
 export default function AppNavigator() {
   return (
-    <Drawer.Navigator screenOptions={{
-      headerShown: false,
-      drawerStyle: { backgroundColor: "#2f2f3a", width: 260 },
-      drawerActiveTintColor: "#facc15",
-      drawerInactiveTintColor: "#fff",
-      drawerLabelStyle: { fontSize: 16 },
-    }}>
+    <Drawer.Navigator
+      screenOptions={{
+        headerShown: false,
+        drawerStyle: { backgroundColor: "#2f2f3a", width: 260 },
+        drawerActiveTintColor: "#facc15",
+        drawerInactiveTintColor: "#fff",
+        drawerLabelStyle: { fontSize: 16 },
+      }}
+    >
       <Drawer.Screen name="Characters" component={CharacterStack} />
       <Drawer.Screen name="Clans" component={ClanStack} />
       <Drawer.Screen name="Villages" component={VillageStack} />

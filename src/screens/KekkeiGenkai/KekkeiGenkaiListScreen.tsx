@@ -8,7 +8,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 // ✅ same local image
-import kgImage from "../../../assets/villages.jpeg";
+import kgImage from "../../../assets/kekkei.png";
 
 export default function KekkeiGenkaiListScreen() {
   const navigation = useNavigation<any>();

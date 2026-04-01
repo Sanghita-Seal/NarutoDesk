@@ -5,29 +5,35 @@ import { useNavigation } from "@react-navigation/native";
 export default function CharacterListScreen() {
   const navigation = useNavigation<any>();
 
-  const renderCard = (item: any) => (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() =>
-        navigation.navigate("CharacterDetail", { item })
-      }
-    >
-      <Image
-        source={{
-          uri:
-            item.images?.[0] ||
-            "https://i.imgur.com/6VBx3io.png",
-        }}
-        style={styles.image}
-      />
+  const renderCard = (item: any) => {
+    // 🔥 SAFE CLAN FIX
+    const clan =
+      item?.personal?.clan ||
+      (Array.isArray(item?.clan) ? item.clan[0] : item?.clan) ||
+      "Unknown Clan";
 
-      <Text style={styles.name}>{item.name}</Text>
+    return (
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() =>
+          navigation.navigate("CharacterDetail", { item })
+        }
+      >
+        <Image
+          source={{
+            uri:
+              item.images?.[0] ||
+              "https://i.imgur.com/6VBx3io.png",
+          }}
+          style={styles.image}
+        />
 
-      <Text style={styles.sub}>
-        {item.clan?.[0] || "Unknown Clan"}
-      </Text>
-    </TouchableOpacity>
-  );
+        <Text style={styles.name}>{item.name}</Text>
+
+        <Text style={styles.sub}>{clan}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <BaseListScreen

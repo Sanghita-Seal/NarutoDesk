@@ -11,7 +11,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 
 // ✅ same image
-import kgImage from "../../../assets/villages.jpeg";
+import kgImage from "../../../assets/kekkei.png";
 
 export default function KekkeiGenkaiDetailScreen() {
   const route = useRoute<any>();

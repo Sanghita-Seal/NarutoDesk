@@ -2,6 +2,7 @@ import { View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import { getGenericData } from "../../services/api";
 import { Ionicons } from "@expo/vector-icons";
+import { TextInput } from "react-native";
 
 type Props = {
   endpoint: string;
@@ -19,6 +20,8 @@ export default function BaseListScreen({
   const [data, setData] = useState<any[]>([]);
   const [visibleData, setVisibleData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
 
   // 🔥 Load data
   useEffect(() => {
@@ -55,12 +58,28 @@ export default function BaseListScreen({
   };
 
   // 🔥 Fake infinite scroll
-  const loadMore = () => {
-    if (!data || data.length === 0) return;
+ const loadMore = () => {
+  if (isSearching) return; // 🚫 STOP during search
 
-    setVisibleData((prev) => [...prev, ...data]);
-  };
+  setVisibleData((prev) => [...prev, ...data]);
+};
+  const handleSearch = (text: string) => {
+  setSearch(text);
 
+  if (!text.trim()) {
+    setIsSearching(false);
+    setVisibleData(data);
+    return;
+  }
+
+  setIsSearching(true);
+
+  const filtered = data.filter((item: any) =>
+    item.name?.toLowerCase().includes(text.toLowerCase())
+  );
+
+  setVisibleData(filtered);
+};
   // 🔥 Loader
   if (loading) {
     return (
@@ -72,6 +91,22 @@ export default function BaseListScreen({
 
   return (
     <View style={styles.container}>
+      <View style={styles.searchContainer}>
+  <Ionicons
+    name="search"
+    size={18}
+    color="#aaa"
+    style={{ marginRight: 8 }}
+  />
+
+  <TextInput
+    placeholder="Search characters..."
+    placeholderTextColor="#888"
+    value={search}
+    onChangeText={handleSearch}
+    style={styles.searchInput}
+  />
+</View>
       <FlatList
         data={visibleData}
         numColumns={2}
@@ -99,4 +134,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#18181b",
   },
+  searchContainer: {
+  flexDirection: "row",
+  alignItems: "center",
+  backgroundColor: "#27272a",
+  borderRadius: 14,
+  paddingHorizontal: 12,
+  marginBottom: 12,
+
+  // subtle elevation
+  shadowColor: "#000",
+  shadowOpacity: 0.3,
+  shadowRadius: 4,
+  elevation: 4,
+},
+
+searchInput: {
+  flex: 1,
+  color: "#fff",
+  paddingVertical: 10,
+  fontSize: 14,
+},
 });
