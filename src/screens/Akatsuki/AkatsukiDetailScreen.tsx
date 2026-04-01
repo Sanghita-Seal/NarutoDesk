@@ -6,12 +6,12 @@ import {
   Image,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
 
 export default function AkatsukiDetailScreen() {
   const route = useRoute<any>();
   const { item } = route.params;
 
-  // 🔥 SAFE HANDLING
   const personal = item?.personal || {};
 
   const affiliation = Array.isArray(personal.affiliation)
@@ -41,15 +41,12 @@ export default function AkatsukiDetailScreen() {
   return (
     <ScrollView style={styles.container}>
       
-      {/* Image */}
       <Image source={{ uri: image }} style={styles.image} />
 
-      {/* Name */}
       <Text style={styles.name}>
         {item?.name || "Unknown"}
       </Text>
 
-      {/* Info */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Information
@@ -105,7 +102,6 @@ export default function AkatsukiDetailScreen() {
         )}
       </View>
 
-      {/* Nature Types */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Nature Types
@@ -124,7 +120,6 @@ export default function AkatsukiDetailScreen() {
         )}
       </View>
 
-      {/* Partners */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Partners
@@ -162,11 +157,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 12,
     marginBottom: 10,
-    color: "#ff3b3b",
+    color: theme.primary,
     textAlign: "center",
   },
   card: {
-    backgroundColor: "#1f1f1f",
+    backgroundColor: theme.card,
     borderRadius: 14,
     padding: 14,
     marginBottom: 14,
@@ -174,17 +169,17 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ff3b3b",
+    color: "#facc15",
     marginBottom: 10,
   },
   label: {
     fontSize: 14,
     marginBottom: 6,
-    color: "#ccc",
+    color: theme.subText,
   },
   value: {
     fontWeight: "600",
-    color: "#fff",
+    color: theme.text,
   },
   jutsuItem: {
     padding: 10,
@@ -194,6 +189,6 @@ const styles = StyleSheet.create({
   },
   jutsuText: {
     fontSize: 14,
-    color: "#fff",
+    color: theme.text,
   },
 });

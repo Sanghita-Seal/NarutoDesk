@@ -1,12 +1,13 @@
 import BaseListScreen from "../shared/BaseListScreen";
 import { Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
+
 
 export default function CharacterListScreen() {
   const navigation = useNavigation<any>();
 
   const renderCard = (item: any) => {
-    // 🔥 SAFE CLAN FIX
     const clan =
       item?.personal?.clan ||
       (Array.isArray(item?.clan) ? item.clan[0] : item?.clan) ||
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 8,
-    backgroundColor: "#27272a",
+    backgroundColor: theme.card,
     borderRadius: 14,
     padding: 10,
   },
@@ -59,12 +60,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   name: {
-    color: "#fff",
+    color: theme.text,
     fontWeight: "bold",
     marginTop: 6,
   },
   sub: {
-    color: "#aaa",
+    color: theme.subText,
     fontSize: 12,
   },
 });

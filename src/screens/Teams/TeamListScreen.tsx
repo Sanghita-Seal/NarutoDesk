@@ -6,8 +6,9 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
 
-// ✅ reuse same image
+
 import teamImage from "../../../assets/clan.png";
 
 export default function TeamListScreen() {
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 8,
-    backgroundColor: "#27272a",
+    backgroundColor: theme.card,
     borderRadius: 14,
     padding: 10,
   },
@@ -54,12 +55,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   name: {
-    color: "#fff",
+    color: theme.text,
     fontWeight: "bold",
     marginTop: 6,
   },
   sub: {
-    color: "#aaa",
+    color: theme.subText,
     fontSize: 12,
   },
 });

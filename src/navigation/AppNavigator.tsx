@@ -1,8 +1,10 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import the
+
+// 🔥 Landing
+import LandingScreen from "../screens/Landing/LandingScreen";
 
 // Character
 import CharacterListScreen from "../screens/Characters/CharacterListScreen";
@@ -38,31 +40,35 @@ import KaraDetailScreen from "../screens/Kara/KaraDetailScreen";
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator();
 
-// 🔥 Common Header Left (menu button)
+
+// 🔥 Common Header
+const commonHeader = {
+  headerStyle: { backgroundColor: "#1b1a18" },
+  headerTintColor: "#facc15",
+  contentStyle: { backgroundColor: "#0b0b0b" },
+  headerTitleAlign: "center" as const,
+  headerTitle: () => (
+    <Text style={{ color: "#facc15", fontWeight: "bold", fontSize: 18 }}>
+      Naruto Explorer
+    </Text>
+  ),
+};
+
+// 🔥 Menu Button
 const menuButton = (navigation: any) => (
   <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-    <Ionicons
-      name="menu"
-      size={26}
-      color="#eecebe"
-      style={{ marginLeft: 10 }}
-    />
+    <Ionicons name="menu" size={26} color="#facc15"  style={{ marginLeft: 10 }} />
   </TouchableOpacity>
 );
 
+
+// ================= STACKS =================
+
 // 🔥 Character Stack
 const CharacterStack = ({ navigation }: any) => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: { backgroundColor: "#1b1a18" },
-      headerTintColor: "#fb7430",
-      contentStyle: { backgroundColor: "#0b0b0b" },
-      headerTitle: "Naruto Explorer",
-      headerTitleAlign: "center",
-      
-    }}
-  >
+  <Stack.Navigator screenOptions={commonHeader}>
     <Stack.Screen
       name="Characters"
       component={CharacterListScreen}
@@ -71,191 +77,56 @@ const CharacterStack = ({ navigation }: any) => (
         headerLeft: () => menuButton(navigation),
       }}
     />
-    <Stack.Screen
-      name="CharacterDetail"
-      component={CharacterDetailScreen}
-      options={{ title: "Details" }}
-    />
+    <Stack.Screen name="CharacterDetail" component={CharacterDetailScreen} />
   </Stack.Navigator>
 );
 
-// 🔥 Clan Stack
-const ClanStack = ({ navigation }: any) => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: { backgroundColor: "#1b1a18" },
-      headerTintColor: "#fb7430",
-      contentStyle: { backgroundColor: "#0b0b0b" },
-    }}
-  >
-    <Stack.Screen
-      name="Clans"
-      component={ClanListScreen}
-      options={{
-        title: "Clans",
-        headerLeft: () => menuButton(navigation),
-      }}
-    />
-    <Stack.Screen
-      name="ClanDetail"
-      component={ClanDetailScreen}
-      options={{ title: "Details" }}
-    />
-  </Stack.Navigator>
-);
 
-// 🔥 Village Stack
-const VillageStack = ({ navigation }: any) => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: { backgroundColor: "#1b1a18" },
-      headerTintColor: "#fb7430",
-      contentStyle: { backgroundColor: "#0b0b0b" },
-    }}
-  >
-    <Stack.Screen
-      name="Villages"
-      component={VillageListScreen}
-      options={{
-        title: "Villages",
-        headerLeft: () => menuButton(navigation),
-      }}
-    />
-    <Stack.Screen
-      name="VillageDetail"
-      component={VillageDetailScreen}
-      options={{ title: "Details" }}
-    />
-  </Stack.Navigator>
-);
+// 🔥 Generic Stack Creator (cleaner)
+const createStack = (
+  listName: string,
+  ListComponent: any,
+  DetailName: string,
+  DetailComponent: any
+) => {
+  return ({ navigation }: any) => (
+    <Stack.Navigator screenOptions={commonHeader}>
+      <Stack.Screen
+        name={listName}
+        component={ListComponent}
+        options={{
+          title: listName,
+          headerLeft: () => menuButton(navigation),
+        }}
+      />
+      <Stack.Screen name={DetailName} component={DetailComponent} />
+    </Stack.Navigator>
+  );
+};
 
-// 🔥 Team Stack
-const TeamStack = ({ navigation }: any) => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: { backgroundColor: "#1b1a18" },
-      headerTintColor: "#fb7430",
-      contentStyle: { backgroundColor: "#0b0b0b" },
-    }}
-  >
-    <Stack.Screen
-      name="Teams"
-      component={TeamListScreen}
-      options={{
-        title: "Teams",
-        headerLeft: () => menuButton(navigation),
-      }}
-    />
-    <Stack.Screen
-      name="TeamDetail"
-      component={TeamDetailScreen}
-      options={{ title: "Details" }}
-    />
-  </Stack.Navigator>
+// 🔥 All stacks
+const ClanStack = createStack("Clans", ClanListScreen, "ClanDetail", ClanDetailScreen);
+const VillageStack = createStack("Villages", VillageListScreen, "VillageDetail", VillageDetailScreen);
+const TeamStack = createStack("Teams", TeamListScreen, "TeamDetail", TeamDetailScreen);
+const KekkeiGenkaiStack = createStack(
+  "Kekkei Genkai",
+  KekkeiGenkaiListScreen,
+  "KekkeiGenkaiDetail",
+  KekkeiGenkaiDetailScreen
 );
-
-// 🔥 Kekkei Genkai Stack
-const KekkeiGenkaiStack = ({ navigation }: any) => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: { backgroundColor: "#1b1a18" },
-      headerTintColor: "#fb7430",
-      contentStyle: { backgroundColor: "#0b0b0b" },
-    }}
-  >
-    <Stack.Screen
-      name="KekkeiGenkai"
-      component={KekkeiGenkaiListScreen}
-      options={{
-        title: "Kekkei Genkai",
-        headerLeft: () => menuButton(navigation),
-      }}
-    />
-    <Stack.Screen
-      name="KekkeiGenkaiDetail"
-      component={KekkeiGenkaiDetailScreen}
-      options={{ title: "Details" }}
-    />
-  </Stack.Navigator>
+const TailedBeastStack = createStack(
+  "Tailed Beasts",
+  TailedBeastListScreen,
+  "TailedBeastDetail",
+  TailedBeastDetailScreen
 );
+const AkatsukiStack = createStack("Akatsuki", AkatsukiListScreen, "AkatsukiDetail", AkatsukiDetailScreen);
+const KaraStack = createStack("Kara", KaraListScreen, "KaraDetail", KaraDetailScreen);
 
-// 🔥 Tailed Beast Stack
-const TailedBeastStack = ({ navigation }: any) => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: { backgroundColor: "#1b1a18" },
-      headerTintColor: "#fb7430",
-      contentStyle: { backgroundColor: "#0b0b0b" },
-    }}
-  >
-    <Stack.Screen
-      name="TailedBeasts"
-      component={TailedBeastListScreen}
-      options={{
-        title: "Tailed Beasts",
-        headerLeft: () => menuButton(navigation),
-      }}
-    />
-    <Stack.Screen
-      name="TailedBeastDetail"
-      component={TailedBeastDetailScreen}
-      options={{ title: "Details" }}
-    />
-  </Stack.Navigator>
-);
 
-// 🔥 Akatsuki Stack
-const AkatsukiStack = ({ navigation }: any) => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: { backgroundColor: "#1b1a18" },
-      headerTintColor: "#fb7430",
-      contentStyle: { backgroundColor: "#0b0b0b" },
-    }}
-  >
-    <Stack.Screen
-      name="Akatsuki"
-      component={AkatsukiListScreen}
-      options={{
-        title: "Akatsuki",
-        headerLeft: () => menuButton(navigation),
-      }}
-    />
-    <Stack.Screen
-      name="AkatsukiDetail"
-      component={AkatsukiDetailScreen}
-      options={{ title: "Details" }}
-    />
-  </Stack.Navigator>
-);
+// ================= DRAWER =================
 
-// 🔥 Kara Stack
-const KaraStack = ({ navigation }: any) => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: { backgroundColor: "#1b1a18" },
-      headerTintColor: "#fb7430",
-      contentStyle: { backgroundColor: "#0b0b0b" },
-    }}
-  >
-    <Stack.Screen
-      name="Kara"
-      component={KaraListScreen}
-      options={{
-        title: "Kara",
-        headerLeft: () => menuButton(navigation),
-      }}
-    />
-    <Stack.Screen
-      name="KaraDetail"
-      component={KaraDetailScreen}
-      options={{ title: "Details" }}
-    />
-  </Stack.Navigator>
-);
-
-// 🔥 Drawer
-export default function AppNavigator() {
+function DrawerNavigator() {
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -275,5 +146,22 @@ export default function AppNavigator() {
       <Drawer.Screen name="Akatsuki" component={AkatsukiStack} />
       <Drawer.Screen name="Kara" component={KaraStack} />
     </Drawer.Navigator>
+  );
+}
+
+
+// ================= ROOT NAV =================
+
+export default function AppNavigator() {
+  return (
+    <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      
+      {/* 🔥 Landing First */}
+      <RootStack.Screen name="Landing" component={LandingScreen} />
+
+      {/* 🔥 Main App */}
+      <RootStack.Screen name="Main" component={DrawerNavigator} />
+
+    </RootStack.Navigator>
   );
 }

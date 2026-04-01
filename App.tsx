@@ -1,25 +1,32 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import {SafeAreaProvider} from "react-native-safe-area-context"
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppNavigator from "../NarutoDex/src/navigation/AppNavigator";
+import * as NavigationBar from "expo-navigation-bar";
+import { useEffect } from "react";
 
-export default function App(){
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "#18181b",
+  },
+};
+
+export default function App() {
+
+  useEffect(() => {
+    NavigationBar.setVisibilityAsync("hidden"); 
+  }, []);
+
   return (
-     <SafeAreaProvider>
-      <NavigationContainer>
-        <View style={styles.container}>
-          <AppNavigator />
-          <StatusBar style="light" />
-        </View>
+    
+      <SafeAreaProvider>
+      <NavigationContainer theme={MyTheme}>
+        <AppNavigator />
+        <StatusBar style="light" />
       </NavigationContainer>
     </SafeAreaProvider>
-  )
+    
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#18181b",
-  },
-});

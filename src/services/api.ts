@@ -5,11 +5,10 @@ export const getGenericData = async (endpoint: string, ) => {
       `${BASE_URL}/${endpoint}`
     );
 
-    const text = await response.text(); // 👈 IMPORTANT
-
+    const text = await response.text();
     console.log("RAW RESPONSE:", text);
 
-    const data = JSON.parse(text); // 👈 parse manually
+    const data = JSON.parse(text); 
 
     return data[endpoint];
 

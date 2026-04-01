@@ -6,20 +6,21 @@ import {
   ScrollView,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
+
 
 export default function CharacterDetailScreen() {
+
   const route = useRoute<any>();
   const { item } = route.params;
 
   const personal = item?.personal || {};
 
-  // 🔥 SAFE CLAN
   const clan =
     personal.clan ||
     (Array.isArray(item?.clan) ? item.clan[0] : item?.clan) ||
     "Unknown";
 
-  // 🔥 UNIVERSAL RENDER
   const renderData = (data: any) => {
     if (!data) return <Text style={styles.value}>No Data</Text>;
 
@@ -46,7 +47,6 @@ export default function CharacterDetailScreen() {
   return (
     <ScrollView style={styles.container}>
       
-      {/* Image */}
       <Image
         source={{
           uri:
@@ -56,10 +56,8 @@ export default function CharacterDetailScreen() {
         style={styles.image}
       />
 
-      {/* Name */}
       <Text style={styles.name}>{item.name}</Text>
 
-      {/* 🔥 BASIC INFO */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Basic Info</Text>
 
@@ -84,61 +82,51 @@ export default function CharacterDetailScreen() {
         </Text>
       </View>
 
-      {/* 🔥 AFFILIATION */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Affiliation</Text>
         {renderData(personal.affiliation)}
       </View>
 
-      {/* 🔥 FAMILY */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Family</Text>
         {renderData(item.family)}
       </View>
 
-      {/* 🔥 NATURE */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Nature Types</Text>
         {renderData(item.natureType)}
       </View>
 
-      {/* 🔥 KEKKEI GENKAI */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Kekkei Genkai</Text>
         {renderData(personal.kekkeiGenkai)}
       </View>
 
-      {/* 🔥 CLASSIFICATION */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Classification</Text>
         {renderData(personal.classification)}
       </View>
 
-      {/* 🔥 OCCUPATION */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Occupation</Text>
         {renderData(personal.occupation)}
       </View>
 
-      {/* 🔥 TEAM */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Team</Text>
         {renderData(personal.team)}
       </View>
 
-      {/* 🔥 TOOLS */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Tools</Text>
         {renderData(item.tools)}
       </View>
 
-      {/* 🔥 RANK */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Rank</Text>
         {renderData(item.rank?.ninjaRank)}
       </View>
 
-      {/* 🔥 JUTSU */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Jutsu</Text>
 
@@ -158,7 +146,7 @@ export default function CharacterDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5e9d7",
+    backgroundColor: theme.background,
     padding: 12,
   },
   image: {
@@ -171,11 +159,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 12,
     marginBottom: 10,
-    color: "#3f2d20",
+    color: theme.primary,
     textAlign: "center",
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor:theme.card,
     borderRadius: 14,
     padding: 14,
     marginBottom: 12,
@@ -184,26 +172,26 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#e76f00",
+    color: theme.primary,
     marginBottom: 8,
   },
   key: {
     fontWeight: "bold",
-    color: "#e76f00",
+    color: theme.text,
   },
   value: {
     fontSize: 14,
-    color: "#333",
+    color: theme.subText,
     marginTop: 4,
   },
   jutsuItem: {
     padding: 10,
-    backgroundColor: "#f1f1f1",
-    borderRadius: 10,
+    backgroundColor: theme.background,
+    borderRadius: 15,
     marginTop: 8,
   },
   jutsuText: {
     fontSize: 14,
-    color: "#333",
+    color: theme.subText,
   },
 });

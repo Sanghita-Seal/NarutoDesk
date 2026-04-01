@@ -6,6 +6,8 @@ import {
   Image,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
+
 
 export default function BaseDetailScreen() {
   const route = useRoute<any>();
@@ -14,7 +16,6 @@ export default function BaseDetailScreen() {
   return (
     <ScrollView style={styles.container}>
       
-      {/* Image (if exists) */}
       {item.images?.[0] && (
         <Image
           source={{ uri: item.images[0] }}
@@ -22,12 +23,10 @@ export default function BaseDetailScreen() {
         />
       )}
 
-      {/* Title */}
       <Text style={styles.title}>
         {item.name || "Unknown"}
       </Text>
 
-      {/* Dynamic Info */}
       <View style={styles.card}>
         {Object.entries(item).map(([key, value]) => {
           if (key === "images" || key === "name") return null;
@@ -47,7 +46,6 @@ export default function BaseDetailScreen() {
 }
 
 
-// 🔥 Helper function (important)
 function formatValue(value: any): string {
   if (Array.isArray(value)) {
     return value.join(", ");
@@ -64,7 +62,7 @@ function formatValue(value: any): string {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#18181b",
+    backgroundColor: theme.background,
     padding: 12,
   },
   image: {

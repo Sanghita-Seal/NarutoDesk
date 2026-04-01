@@ -9,9 +9,10 @@ import {
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
+import { theme } from "../../constants/theme";
 
-// ✅ same image
-import kgImage from "../../../assets/kekkei.png";
+
+import kgImage from "../../../assets//kekkei.png";
 
 export default function KekkeiGenkaiDetailScreen() {
   const route = useRoute<any>();
@@ -44,13 +45,10 @@ export default function KekkeiGenkaiDetailScreen() {
   return (
     <ScrollView style={styles.container}>
       
-      {/* Top Image */}
       <Image source={kgImage} style={styles.image} />
 
-      {/* Name */}
       <Text style={styles.name}>{item.name}</Text>
 
-      {/* Info */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Kekkei Genkai Info
@@ -64,7 +62,6 @@ export default function KekkeiGenkaiDetailScreen() {
         </Text>
       </View>
 
-      {/* Members */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Users</Text>
 
@@ -108,7 +105,7 @@ export default function KekkeiGenkaiDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5e9d7",
+    backgroundColor: theme.background,
     padding: 12,
   },
   image: {
@@ -121,11 +118,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 12,
     marginBottom: 10,
-    color: "#3f2d20",
+    color: theme.primary,
     textAlign: "center",
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: theme.card,
     borderRadius: 14,
     padding: 14,
     marginBottom: 14,
@@ -134,23 +131,23 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#e76f00",
+    color: theme.primary,
     marginBottom: 10,
   },
   label: {
     fontSize: 14,
     marginBottom: 6,
-    color: "#444",
+    color: theme.text,
   },
   value: {
     fontWeight: "600",
-    color: "#222",
+    color: theme.subText,
   },
   memberCard: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
-    backgroundColor: "#f1f1f1",
+    backgroundColor: theme.subCard,
     padding: 10,
     borderRadius: 10,
   },
@@ -163,6 +160,6 @@ const styles = StyleSheet.create({
   memberName: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#333",
+    color: theme.subText,
   },
 });

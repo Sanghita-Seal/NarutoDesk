@@ -6,8 +6,9 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
 
-// ✅ Import local image
+
 import clanImage from "../../../assets/clan.png";
 
 export default function ClanListScreen() {
@@ -20,7 +21,6 @@ export default function ClanListScreen() {
         navigation.navigate("ClanDetail", { item })
       }
     >
-      {/* ✅ Local Image */}
       <Image source={clanImage} style={styles.image} />
 
       <Text style={styles.name}>{item.name}</Text>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 8,
-    backgroundColor: "#27272a",
+    backgroundColor: theme.background,
     borderRadius: 14,
     padding: 10,
   },
@@ -55,12 +55,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   name: {
-    color: "#fff",
+    color: theme.text,
     fontWeight: "bold",
     marginTop: 6,
   },
   sub: {
-    color: "#aaa",
+    color: theme.subText,
     fontSize: 12,
   },
 });

@@ -6,12 +6,13 @@ import {
   Image,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
+
 
 export default function KaraDetailScreen() {
   const route = useRoute<any>();
   const { item } = route.params;
 
-  // 🔥 SAFE FALLBACKS
   const personal = item?.personal || {};
 
   const affiliation = Array.isArray(personal.affiliation)
@@ -37,15 +38,12 @@ export default function KaraDetailScreen() {
   return (
     <ScrollView style={styles.container}>
       
-      {/* Image */}
       <Image source={{ uri: image }} style={styles.image} />
 
-      {/* Name */}
       <Text style={styles.name}>
         {item?.name || "Unknown"}
       </Text>
 
-      {/* Info */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Information
@@ -73,7 +71,6 @@ export default function KaraDetailScreen() {
         </Text>
       </View>
 
-      {/* Jutsu */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Jutsu
@@ -92,7 +89,6 @@ export default function KaraDetailScreen() {
         )}
       </View>
 
-      {/* Nature Types */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Nature Types
@@ -111,7 +107,6 @@ export default function KaraDetailScreen() {
         )}
       </View>
 
-      {/* Kekkei Genkai */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Kekkei Genkai
@@ -128,7 +123,7 @@ export default function KaraDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0b0b0b",
+    backgroundColor: theme.background,
     padding: 12,
   },
   image: {
@@ -141,11 +136,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 12,
     marginBottom: 10,
-    color: "#9b5cff",
+    color: theme.primary,
     textAlign: "center",
   },
   card: {
-    backgroundColor: "#1f1f1f",
+    backgroundColor: theme.card,
     borderRadius: 14,
     padding: 14,
     marginBottom: 14,
@@ -153,26 +148,26 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#9b5cff",
+    color: theme.primary,
     marginBottom: 10,
   },
   label: {
     fontSize: 14,
     marginBottom: 6,
-    color: "#ccc",
+    color: theme.text,
   },
   value: {
     fontWeight: "600",
-    color: "#fff",
+    color: theme.subText,
   },
   jutsuItem: {
     padding: 10,
-    backgroundColor: "#2a2a2a",
-    borderRadius: 10,
+    backgroundColor: theme.subCard,
+    borderRadius: 15,
     marginBottom: 8,
   },
   jutsuText: {
     fontSize: 14,
-    color: "#fff",
+    color: theme.subText,
   },
 });

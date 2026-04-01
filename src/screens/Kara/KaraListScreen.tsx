@@ -6,6 +6,8 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
+
 
 export default function KaraListScreen() {
   const navigation = useNavigation<any>();
@@ -17,7 +19,6 @@ export default function KaraListScreen() {
         navigation.navigate("KaraDetail", { item })
       }
     >
-      {/* API Image */}
       <Image
         source={{
           uri:
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 8,
-    backgroundColor: "#27272a",
+    backgroundColor:theme.card,
     borderRadius: 14,
     padding: 10,
   },
@@ -59,12 +60,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   name: {
-    color: "#fff",
+    color: theme.text,
     fontWeight: "bold",
     marginTop: 6,
   },
   sub: {
-    color: "#aaa",
+    color: theme.subText,
     fontSize: 12,
   },
 });

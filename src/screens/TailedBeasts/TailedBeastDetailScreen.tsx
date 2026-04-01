@@ -6,6 +6,8 @@ import {
   Image,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
+
 
 export default function TailedBeastDetailScreen() {
   const route = useRoute<any>();
@@ -14,7 +16,6 @@ export default function TailedBeastDetailScreen() {
   return (
     <ScrollView style={styles.container}>
       
-      {/* Image */}
       <Image
         source={{
           uri:
@@ -24,10 +25,8 @@ export default function TailedBeastDetailScreen() {
         style={styles.image}
       />
 
-      {/* Name */}
       <Text style={styles.name}>{item.name}</Text>
 
-      {/* Info */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Information
@@ -49,7 +48,6 @@ export default function TailedBeastDetailScreen() {
         </Text>
       </View>
 
-      {/* Jutsu */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Jutsu
@@ -70,7 +68,6 @@ export default function TailedBeastDetailScreen() {
         )}
       </View>
 
-      {/* Nature Types */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Nature Types
@@ -89,7 +86,6 @@ export default function TailedBeastDetailScreen() {
         )}
       </View>
 
-      {/* Jinchuriki */}
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>
           Jinchūriki
@@ -116,7 +112,7 @@ export default function TailedBeastDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5e9d7",
+    backgroundColor: theme.background,
     padding: 12,
   },
   image: {
@@ -129,11 +125,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 12,
     marginBottom: 10,
-    color: "#3f2d20",
+    color: theme.primary,
     textAlign: "center",
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: theme.card,
     borderRadius: 14,
     padding: 14,
     marginBottom: 14,
@@ -142,26 +138,26 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#e76f00",
+    color:theme.primary,
     marginBottom: 10,
   },
   label: {
     fontSize: 14,
     marginBottom: 6,
-    color: "#444",
+    color: theme.text,
   },
   value: {
     fontWeight: "600",
-    color: "#222",
+    color: theme.subText,
   },
   jutsuItem: {
     padding: 10,
-    backgroundColor: "#f1f1f1",
+    backgroundColor: theme.subCard,
     borderRadius: 10,
     marginBottom: 8,
   },
   jutsuText: {
     fontSize: 14,
-    color: "#333",
+    color:theme.subText,
   },
 });
